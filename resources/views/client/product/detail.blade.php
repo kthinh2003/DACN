@@ -42,7 +42,7 @@
                         <h1 class="name-product-detail">
                             {{ $productDetail->name }}
                         </h1>
-                        <div class="attribute-product-detail">
+                        {{-- <div class="attribute-product-detail">
                             Mã sách: <span
                                 class="attribute-product-detail-text text-danger">{{ $productDetail->code }}</span>
                         </div>
@@ -105,8 +105,8 @@
                                    data-act="buynow" data-direct="{{ route('user.cart') }}" data-quantity="{{$qty}}"><i class="bi bi-cart2"></i><span>Mua ngay</span></a>
                             </div>
                         </div>
-                        
-                    </div> 
+                         --}}
+                    </div>
                 </div>
             </div>
         </div>

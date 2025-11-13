@@ -1,5 +1,6 @@
 <?php
 use App\Http\Controllers\Client\CHomeController;
+
 ?>
 <div class="header">
     <div class="header-top">
@@ -27,17 +28,13 @@ use App\Http\Controllers\Client\CHomeController;
                                     </button>
                             </div>
                         </form>
-                        
+
                         <div id="search-result" class="search-result-list">
                             <div id="loading" class="search-loading loading-spinner">Đang tìm kiếm...</div>
-                        </div> 
+                        </div>
                     </div>
                 </div>
                 <div class="header-bottom-end">
-                    <a class="header-bottom-item" href="{{route('user.cart')}}">
-                        <i class="fa-regular fa-cart-shopping"></i>
-                        <h6>Giỏ hàng</h6>
-                    </a>
                     <a class="header-bottom-item" href="{{route('user.info')}}">
                         <i class="fa-solid fa-user"></i>
                         <h6>Tài khoản</h6>

@@ -7,10 +7,10 @@
         <div class="product-content">
             <div class="title-main">
                 <span>
-                    <?= $pageName ?> 
+                    <?= $pageName ?>
                 </span>
             </div>
-            <div class="content-main d-flex"> 
+            <div class="content-main d-flex">
                 <div class="grid-profuct">
                     @isset($productInternal)
                         @if (!$productInternal->isEmpty())
@@ -33,30 +33,6 @@
                                                     <div class="name-product"><a class="text-split-2"
                                                             href="{{ route('product.detail', ['id' => $v->id]) }}"
                                                             title="{{ $v->name }}">{{ $v->name }}</a>
-                                                    </div>
-
-                                                    <div class="price-product">
-                                                        @if ($v->discount)
-                                                            <div class="price-new">
-                                                                @formatmoney($v->sale_price)
-                                                            </div>
-                                                            <div class="price-old">
-                                                                @formatmoney($v->regular_price)
-                                                            </div>
-                                                            <div class="discount">
-                                                                {{ $v->discount }}%
-                                                            </div>
-                                                        @else
-                                                            @if ($v->regular_price)
-                                                                <div class="price-new">
-                                                                    @formatmoney($v->regular_price)
-                                                                </div>
-                                                            @else
-                                                                <div class="price-new">
-                                                                    Liên hệ
-                                                                </div>
-                                                            @endif
-                                                        @endif
                                                     </div>
                                                 </div>
                                             </div>

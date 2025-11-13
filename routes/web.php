@@ -1,20 +1,20 @@
 <?php
 
-use Illuminate\Support\Facades\Route; 
-use Illuminate\Support\Facades\Auth; 
-use App\Http\Controllers\Admin\HomeController; 
-use App\Http\Controllers\Admin\ProductController; 
-use App\Http\Controllers\Admin\ProductListController; 
-use App\Http\Controllers\Admin\PublisherController; 
-use App\Http\Controllers\Admin\UserController; 
-use App\Http\Controllers\Admin\MemberController; 
-use App\Http\Controllers\Admin\RoleController; 
-use App\Http\Controllers\Admin\DashboardController; 
-use App\Http\Controllers\Admin\OrderController; 
-use App\Http\Controllers\Admin\ImportOrderController; 
-use App\Http\Controllers\Admin\PhotoController; 
-use App\Http\Controllers\Admin\NewsController; 
-use App\Http\Controllers\Admin\SettingController; 
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\ProductListController;
+use App\Http\Controllers\Admin\PublisherController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\MemberController;
+use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\ImportOrderController;
+use App\Http\Controllers\Admin\PhotoController;
+use App\Http\Controllers\Admin\NewsController;
+use App\Http\Controllers\Admin\SettingController;
 
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\Client\CCartController;
@@ -31,7 +31,7 @@ use App\Http\Controllers\Client\CHomeController;
 Route::get('/sign-in', [CUserController::class, 'clientLogin'])->name('user.login');
 Route::post('check-login', [CUserController::class, 'postlogin'])->name('user.postlogin');
 Route::get('/check-login', function () {  return response()->json(['logged_in' => Auth::guard('member')->check()]);});
-Route::get('/signup', [CUserController::class, 'clientRegister'])->name('user.signup'); 
+Route::get('/signup', [CUserController::class, 'clientRegister'])->name('user.signup');
 Route::post('check-register', [CUserController::class, 'postregister'])->name('user.postregister');
 Route::get('signout', [CUserController::class, 'logout'])->name('user.signout');
 
@@ -46,20 +46,19 @@ Route::prefix('/')->group(function () {
     /* Search */
     Route::controller(CProductController::class)->group(function () {
         Route::get('/search-product', 'search')->name('product.search');
-  
-    
+    });
+
     /* News */
     Route::controller(CNewsController::class)->group(function () {
         Route::get('/news', 'index')->name('news');
         Route::get('/news/{id}', [CNewsController::class, 'detail'])->name('news.detail');
     });
+
     /* Product */
     Route::controller(CProductController::class)->group(function () {
         Route::get('/product', 'index')->name('product');
         Route::get('/product/{id}', [CProductController::class, 'detail'])->name('product.detail');
         Route::get('/product/{id}/buy-now', 'add')->name('product.add');
-        
-    });
     });
 
     /* Cart */
@@ -73,7 +72,7 @@ Route::prefix('/')->group(function () {
 
     });
 
-    
+
     /* Info */
     Route::controller(CInfoController::class)->group(function () {
         Route::get('user-info', 'index')->name('user.info');
@@ -94,7 +93,7 @@ Route::prefix('/')->group(function () {
         Route::get('change-password', 'index')->name('user.changepassword');
         Route::post('change-password/update', 'update')->name('user.changepassword.update');
     });
-  
+
     /* PAYMENT */
 
     Route::controller(PaymentController::class)->group(function () {
@@ -105,9 +104,6 @@ Route::prefix('/')->group(function () {
         Route::get('/vnpay_return', 'return')->name('vnpay.return');
     });
 
-    /*VNPAY*/
-    Route::post('/vnpay_return', [PaymentController::class, 'return'])->name('vnpay.return');
-
 });
 
 Auth::routes();
@@ -115,28 +111,12 @@ Auth::routes();
 Route::get('/admin', [HomeController::class, 'index'])->name('home');
 Route::get('/adminlogout', [HomeController::class, 'logoutAdmin'])->name('admin.logout');
 
-Route::middleware(['auth', 'user-access:admin'])->group(function () {  
-    Route::prefix('admin')->group(function () { 
+Route::middleware(['auth', 'user-access:admin'])->group(function () {
+    Route::prefix('admin')->group(function () {
         Route::get('', [DashboardController::class, 'index'])->name('admin.dashboard.dashboard');
         Route::get('/{month?}&{year}', [DashboardController::class, 'filter'])->name('ajax.dashboard');
         Route::get('/{month?}&{year}', [DashboardController::class, 'filter'])->name('ajax.dashboard');
-        
-        /* Order */
-        Route::prefix('order')->group(function () {
-            Route::get('', [OrderController::class, 'index'])->name('order.index')->middleware('can:order-list');
-            Route::get('/view/{id}', [OrderController::class, 'view'])->name('order.view')->middleware('can:order-view-edit');
-        }); 
 
-        /* Import_order */
-        Route::prefix('import_order')->group(function () {
-            Route::get('', [ImportOrderController::class, 'index'])->name('import_order.index')->middleware('can:import-order-list');
-            Route::get('/create', [ImportOrderController::class, 'create'])->name('import_order.create')->middleware('can:import-order-add');
-            Route::post('/store', [ImportOrderController::class, 'store'])->name('import_order.store')->middleware('can:import-order-view');
-            Route::get('/delete/{id}', [ImportOrderController::class, 'delete'])->name('import_order.delete')->middleware('can:import-order-delete');
-            Route::get('/view/{id}', [ImportOrderController::class, 'view'])->name('import_order.view');
-            Route::get('/get-product-id', [ImportOrderController::class, 'getProductId'])->name('get-product-id]');
-        });
- 
         /* Publisher */
         Route::prefix('publisher')->group(function () {
             Route::get('', [PublisherController::class, 'index'])->name('publisher.index')->middleware('can:publisher-list');
@@ -147,15 +127,6 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
             Route::get('/delete/{id}', [PublisherController::class, 'delete'])->name('publisher.delete')->middleware('can:publisher-delete');
         });
 
-        /* Category */
-        Route::prefix('categories')->group(function () { 
-            Route::get('', [ProductListController::class, 'index'])->name('productList.index')->middleware('can:category-list');
-            Route::get('/create', [ProductListController::class, 'create'])->name('productList.create')->middleware('can:category-add');
-            Route::post('/store', [ProductListController::class, 'store'])->name('productList.store');
-            Route::get('/edit/{id}', [ProductListController::class, 'edit'])->name('productList.edit')->middleware('can:category-edit');
-            Route::post('/update/{id}', [ProductListController::class, 'update'])->name('productList.update');
-            Route::get('/delete/{id}', [ProductListController::class, 'delete'])->name('productList.delete')->middleware('can:category-delete');
-        });
 
         /* Product */
         Route::prefix('product')->group(function () {
@@ -200,7 +171,7 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
 
         Route::resource('slider', PhotoController::class)->except(['show', 'destroy']);
         Route::resource('banner', PhotoController::class)->except(['show', 'destroy']);
-    
+
 
         /* Photo */
         Route::prefix('photo/{type}')->group(function () {
@@ -210,7 +181,7 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
             Route::get('/edit/{id}', [PhotoController::class, 'edit'])->name('photo.edit')->middleware('can:photo-edit');
             Route::post('/update/{id}', [PhotoController::class, 'update'])->name('photo.update');
             Route::get('/delete/{id}', [PhotoController::class, 'delete'])->name('photo.delete')->middleware('can:photo-delete');
-        });   
+        });
 
         /* News */
         Route::prefix('news')->group(function () {
@@ -222,15 +193,9 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
             Route::get('/delete/{id}', [NewsController::class, 'delete'])->name('news.delete')->middleware('can:news-delete');
         });
 
-        /* Warehouse */
-        Route::prefix('warehouse')->group(function () {
-            Route::get('', [ProductController::class, 'warehouse'])->name('warehouse.index')->middleware('can:warehouse-list');
-        });
-
         /* Setting */
         Route::get('setting', [SettingController::class, 'index'])->name('setting.index')->middleware('can:setting-list');
         Route::post('setting/update', [SettingController::class, 'update'])->name('setting.update')->middleware('can:setting-edit');
-    
+
     });
 });
- 

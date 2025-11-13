@@ -27,7 +27,8 @@
 <div class="content-wrapper bg-white">
     <div class="content">
         <div class="container-fluid">
-            <div class="row pt-3">
+            Trang Dashboard
+            {{-- <div class="row pt-3">
                 <div class="col-12 col-sm-6 col-md-3">
                     <div class="info-box">
                         <span class="info-box-icon bg-info elevation-1"><i class="fas fa-list"></i></span>
@@ -200,7 +201,7 @@
                     </div>
                     <!-- /.card -->
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 @endsection

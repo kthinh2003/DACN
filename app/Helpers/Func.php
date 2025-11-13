@@ -2,7 +2,7 @@
 
 namespace App\Helpers;
 
-use Illuminate\Support\Facades\DB; 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class Func
@@ -12,24 +12,6 @@ class Func
         return iconv('UTF-8', 'ISO-8859-1', $str);
     }
 
-    /* Format money */
-    public static function formatMoney($price = 0, $unit = 'đ', $html = false)
-    {
-        $str = '';
-
-        if ($price) {
-            $str .= number_format($price, 0, ',', '.');
-            if ($unit != '') {
-                if ($html) {
-                    $str .= '<span>' . $unit . '</span>';
-                } else {
-                    $str .= $unit;
-                }
-            }
-        }
-
-        return $str;
-    }
 
     /* Format phone */
     public static function formatPhone($number, $dash = ' ')
@@ -52,8 +34,8 @@ class Func
 
         return $str;
     }
-
-    function CheckPermissionAdmin($id_user, $permissionCheck)
+    // hàm này check quyền âdmin
+    public static function CheckPermissionAdmin($id_user, $permissionCheck)
     {
         $id_role = DB::table('table_user_roles')->where('id_member', $id_user)->pluck('id_role');
         $arrPermission = DB::table('table_permission_role')->whereIn('id_role', $id_role)->pluck('id_permission');
@@ -62,9 +44,9 @@ class Func
         if (Str::contains($permissionCheck, $arrKeyPermission)){
             return true;
         } else {
-            return false; 
+            return false;
         }
 
-    
+
     }
 }

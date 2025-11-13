@@ -354,27 +354,6 @@ function AllRun() {
                         if (response.products && response.products.length > 0) {
                             response.products.forEach(function (product) {
                                 var priceComponent = "";
-                                var sale_price = formatMoney(
-                                    product.sale_price
-                                );
-                                var regular_price = formatMoney(
-                                    product.regular_price
-                                );
-                                if (product.sale_price) {
-                                    priceComponent = `<div class="price-product">
-                                                        <div class="price-new"> ${sale_price}</div>
-                                                        <div class="price-old">${regular_price} </div>
-                                                        <div class="discount">${product.discount}%</div>
-                                                    </div>`;
-                                } else if (product.regular_price) {
-                                    priceComponent = `<div class="price-product">
-                                                        <div class="price-new">${regular_price}</div>
-                                                    </div>`;
-                                } else {
-                                    priceComponent = `<div class="price-product">
-                                                        <div class="price-new">Liên hệ</div>
-                                                    </div>`;
-                                }
                                 productHtml += `
                                 <div class="product-item product-slick-item" data-id="${
                                     product.id
@@ -460,35 +439,14 @@ function AllRun() {
         }
     };
 
-    // $(document).ready(function () {
-    //     if ($(".product-from-ajax").length > 0) {
-    //         $("body").on("click", ".product-button-cart", function () {
-    //             const route = $(this).parents("[data-route]").data("route"),
-    //                 id = $(this).parents("[data-id]").data("id");
-
-    //             console.log(route, id);
-    //             $.ajax({
-    //                 url: route + "/" + id,
-    //                 type: "GET",
-    //                 success: function (response) {
-    //                     location.reload();
-    //                 },
-    //                 error: function (xhr, status, error) {
-    //                     console.error(xhr.responseText);
-    //                 },
-    //             });
-    //         });
-    //     }
-    // }); 
-
     $("body").on("click", ".add-to-cart", function (event) {
         event.preventDefault();
-    
+
         const act = $(this).data("act") || 0;
         const direct = $(this).data("direct") || 0;
         const route = $(this).data("route");
         const quantity = $("#qty_product").val() || 1;
-    
+
         $.ajax({
             url: "/check-login",
             type: "GET",
@@ -521,7 +479,7 @@ function AllRun() {
             },
         });
     });
-    
+
 
     // Quantity detail page 1
     $(".quantity-minus-pro-detail,.quantity-plus-pro-detail,input.qty-pro").on(
@@ -663,14 +621,14 @@ function AllRun() {
                 },
             });
         }
-    );  
+    );
 
     // Delete product from cart
     $("body").on("click", ".del-procart", function (event) {
         event.preventDefault();
 
         const userConfirmed = confirm("Bạn có chắc chắn muốn xóa sản phẩm này không?");
-    
+
         if (!userConfirmed) {
             return;
         }
@@ -733,7 +691,7 @@ $(document).ready(function () {
     AllRun();
 });
 
-// search with ajax 
+// search with ajax
 
 
 $(document).ready(function () {
@@ -747,7 +705,7 @@ $(document).ready(function () {
     const searchHandler = debounce(function () {
         const query = $("#search-input").val();
             urlProduct= "http://127.0.0.1:8000/product/";
-        if (query.length > 1) { 
+        if (query.length > 1) {
             $.ajax({
                 url: "/search-product",
                 method: "GET",
@@ -766,8 +724,8 @@ $(document).ready(function () {
                                             <div class="product-info-result">
                                                 <span>${product.name}</span>
                                             </div>
-                                        </a>                         
-                                    </div>   
+                                        </a>
+                                    </div>
                             `;
                         });
                     } else {
@@ -791,10 +749,10 @@ $(document).ready(function () {
 
 $(document).ready(function () {
     $('#cart-province').on('change', function () {
-        var provinceId = $(this).val(); 
-        if (provinceId != 0) { 
+        var provinceId = $(this).val();
+        if (provinceId != 0) {
             $.ajax({
-                url: '/get-districts', 
+                url: '/get-districts',
                 type: 'GET',
                 data: { province_id: provinceId },
                 success: function (response) {
@@ -814,7 +772,7 @@ $(document).ready(function () {
             $('#cart-ward').empty().append('<option value="0">Xã / Phường:</option>');
         }
     });
- 
+
     $('#cart-distrist').on('change', function () {
         var districtId = $(this).val();
         if (districtId != 0) {

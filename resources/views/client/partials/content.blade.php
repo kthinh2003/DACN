@@ -35,45 +35,11 @@
                                                         href="{{ route('product.detail', ['id' => $v->id]) }}"
                                                         title="{{ $v->name }}">{{ $v->name }}</a>
                                                 </div>
-                                                <div class="price-product">
-                                                    @if ($v->discount)
-                                                        <div class="price-new">
-                                                            {{ \App\Helpers\Func::formatMoney($v->regular_price) }}
-                                                        </div>
-                                                        <div class="discount">
-                                                            {{ $v->discount }}%
-                                                        </div>
-                                                    @else
-                                                        @if ($v->regular_price)
-                                                            <div class="price-new">
-                                                                @formatmoney($v->regular_price)
-                                                            </div>
-                                                        @else
-                                                            <div class="price-new">
-                                                                Liên hệ
-                                                            </div>
-                                                        @endif
-                                                    @endif
-                                                </div>
-                                            </div>
-                                            <div class="product-button text-center">
-                                                <div class="product-button-cart btn rounded btn-success mb-1 w-100 ">
-                                                    <a href="{{ route('add_index.cart', ['id' => $v->id]) }}"
-                                                        class="product-button-cart-action button-addnow text-light add-to-cart"
-                                                        data-route="{{ route('add_index.cart', ['id' => $v->id]) }}"><i
-                                                            class="fa-solid fa-cart-circle-plus me-1"></i>Thêm vào giỏ hàng</a>
-                                                </div>
-                                                <div class="product-button-cart-buy btn rounded btn-primary  w-100 ">
-                                                    <a href="#" class="product-button-cart-action add-to-cart text-light"
-                                                        data-route="{{ route('add_index.cart', ['id' => $v->id]) }}"
-                                                        data-act="buynow" data-direct="{{ route('user.cart') }}"><i
-                                                            class="fa-solid fa-basket-shopping-simple me-1"></i>Mua ngay</a>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                
+
                             @endforeach
                         </div>
                     </div>
@@ -98,16 +64,16 @@
                                 <div class="categorysecond" data-idf="{{ $v->id }}"
                                     data-ids="{{ $category_second->id }}"
                                     data-url="{{ route('get-category-data', ['categoryId' => $category_second->id]) }}">
-                                  <div class="category-second-name">{{ $category_second->name }}</div>  
+                                  <div class="category-second-name">{{ $category_second->name }}</div>
                                 </div>
-                            @endforeach 
+                            @endforeach
                         </div>
                     </div>
-                 
+
                     <div class="paging-product-category-style paging-product-category-{{ $v->id }}"
                         data-route="{{ route('add_index.cart', ['id'=> $v->id , 'quantity' => 1]) }}">
                     </div>
-                    
+
                 </div>
             </div>
         @endforeach

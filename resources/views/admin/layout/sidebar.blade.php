@@ -1,8 +1,8 @@
 <?php
 use App\Http\Controllers\Admin\HomeController;
-$user = HomeController::getUser(); 
+$user = HomeController::getUser();
 $func = new App\Helpers\Func();
- 
+
 ?>
 <aside class="main-sidebar sidebar-light-primary elevation-4">
     <a class="brand-link text-center">
@@ -15,9 +15,9 @@ $func = new App\Helpers\Func();
                     <a href="{{ route('admin.dashboard.dashboard') }}" class="nav-link">
                         <i class="nav-icon fas fa-chart-pie"></i>
                         <p class="text-capitalize">Thống kê</p>
-                    </a> 
-                </li> 
-                @if ($func->CheckPermissionAdmin($user->id, 'list_category,list_publisher,list_product,list_warehouse'))
+                    </a>
+                </li>
+                {{-- @if ($func->CheckPermissionAdmin($user->id, 'list_category,list_publisher,list_product,list_warehouse'))
                 <li class="nav-item">
                     <a href="" class="nav-link">
                         <i class="nav-icon text-sm fas fa-layer-group"></i>
@@ -69,40 +69,8 @@ $func = new App\Helpers\Func();
                         @endif
                     </ul>
                 </li>
-                @endif
-                @if ($func->CheckPermissionAdmin($user->id, 'list_order', 'list_import_order'))
-                <li class="nav-item ">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon text-sm fas fa-layer-group"></i>
-                        <p class="text-capitalize">
-                            Group Đơn Hàng
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">  
-                        @if ($func->CheckPermissionAdmin($user->id, 'list_order'))
-                        <li class="nav-item">
-                            <a href="{{ route('order.index') }}" class="nav-link">
-                                <i class="nav-icon fas fa-book"></i>
-                                <p class="text-capitalize">
-                                    Đơn hàng
-                                </p>
-                            </a>
-                        </li>
-                        @endif
-                        @if ($func->CheckPermissionAdmin($user->id, 'list_import_order'))
-                        <li class="nav-item">
-                            <a href="{{ route('import_order.index') }}" class="nav-link">
-                                <i class="nav-icon text-sm fas fa-boxes"></i>
-                                <p class="text-capitalize">
-                                    Đơn nhập
-                                </p>
-                            </a>
-                        </li>
-                        @endif 
-                    </ul>
-                </li>
-                @endif
+                @endif --}}
+
                 @if ($func->CheckPermissionAdmin($user->id, 'list_user,list_role','list_member'))
                 <li class="nav-item ">
                     <a href="#" class="nav-link">
@@ -112,7 +80,7 @@ $func = new App\Helpers\Func();
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
-                    <ul class="nav nav-treeview"> 
+                    <ul class="nav nav-treeview">
                         @if ($func->CheckPermissionAdmin($user->id, 'list_user'))
                         <li class="nav-item">
                             <a href="{{ route('users.index') }}" class="nav-link">
@@ -142,7 +110,7 @@ $func = new App\Helpers\Func();
                                 </p>
                             </a>
                         </li>
-                        @endif 
+                        @endif
                     </ul>
                 </li>
                 @endif
@@ -155,7 +123,7 @@ $func = new App\Helpers\Func();
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
-                    <ul class="nav nav-treeview"> 
+                    <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="{{ route('photo.index', ['type' => 'slider']) }}" class="nav-link">
                                 <i class="nav-icon fa-solid fa-image"></i>
@@ -167,9 +135,9 @@ $func = new App\Helpers\Func();
                                 <i class="nav-icon fa-solid fa-image"></i>
                                 <p class="text-capitalize">Banner</p>
                             </a>
-                        </li>                        
+                        </li>
                     </ul>
-                </li> 
+                </li>
                 @endif
                 @if ($func->CheckPermissionAdmin($user->id, 'list_news','add_news','edit_news','delete_news'))
                 <li class="nav-item">
