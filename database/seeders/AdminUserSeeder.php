@@ -20,7 +20,7 @@ class AdminUserSeeder extends Seeder
             'phone' => '0123456789',
             'address' => 'Admin Address',
             'email' => '0306221301@caothang.edu.vn',
-            'password' => Hash::make('admin123'), // Mật khẩu: admin123
+            'password' => Hash::make('123123An'), // Mật khẩu: admin123
             'type' => 1, // 1 = Admin
             'email_verified_at' => now(),
         ]);

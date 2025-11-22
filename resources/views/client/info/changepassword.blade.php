@@ -16,9 +16,9 @@
                             <h3 class="user-list-inf-item">
                                 <a href="{{route('user.info')}}"><span class="user-list-item-name">Thông tin tài khoản</span></a>
                             </h3>
-                            <h3 class="user-list-inf-item">
+                            <!-- <h3 class="user-list-inf-item">
                                 <a href="{{route('user.order')}}"><span class="user-list-item-name">Lịch sử mua hàng</a>
-                            </h3>
+                            </h3> -->
                             <h3 class="user-list-inf-item">
                                 <a href="{{route('user.changepassword')}}">
                                     <span class="user-list-item-name" style="font-size: 15px;color:#5070C0;font-weight: 700">
