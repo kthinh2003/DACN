@@ -20,6 +20,11 @@ use App\Http\Controllers\Client\CHomeController;
                 </a>
             </li>
             <li class="menu-main-li">
+                <a href="{{ route('poetry') }}" title="Văn thơ">
+                    Văn thơ
+                </a>
+            </li>
+            <li class="menu-main-li">
               
                 <a href="{{route('user.info')}}" title="Thông tin tài khoản">
                     Tài khoản

@@ -10,7 +10,6 @@
     <div class="wrap-container" style="margin-top: 16em">
         <div class="{{ Request::route()->getName() == 'index' ? 'external-page' : 'internal-page' }}">
             @include('client.partials.header')
-            {{-- @include('client.partials.menu') --}}
             @include('client.partials.slider')
             <div class="{{ Request::route()->getName() == 'index' ? 'external-content' : 'internal-content py50' }}">
                 @if (Request::route()->getName() == 'index')

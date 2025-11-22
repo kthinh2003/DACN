@@ -7,6 +7,9 @@
     <title>Thông tin người dùng</title>
 @endsection
 @section('content')
+    @php
+        $rateItem = $rate[0] ?? null;
+    @endphp
     <!-- Thông tin user -->
     <div class="wrap-content">
         <div class="title-main">
@@ -41,7 +44,8 @@
                     <div class="form-group">
                         <!--sao-->
                         <div class="stars">
-                            @switch($rate[0]->star_num)
+                            @if($rateItem)
+                                @switch($rateItem->star_num)
                                 @case(1)
                                     <i class="fa-regular fa-star stars_static"></i>
                                     <i class="fa-regular fa-star stars_static"></i>
@@ -80,22 +84,23 @@
                                 @default
                                     
                             @endswitch
+                            @endif
                         </div>
                         <!--end sao-->
                         <!--danh gia kh-->                        
                         <div class="stars">
-                            {{$rate[0]->content}}
+                            {{ $rateItem?->content ?? '-' }}
                         </div>
                         <!--end danh gia kh--> 
                         <!--thoi gian tao-->                         
                         <div class="stars">
-                            {{$rate[0]->created_at}}
+                            {{ $rateItem?->created_at ?? '-' }}
                         </div>
                         <!--end thoi gian tao-->
                         <!--phan hoi admin-->                         
-                        @if ($rate[0]->reply != null)
+                        @if ($rateItem && $rateItem->reply != null)
                         <div class="stars">
-                            {{$rate[0]->reply}}
+                            {{ $rateItem->reply }}
                         </div>
                         @endif
                         <!--end phan hoi admin-->

@@ -1,10 +1,12 @@
 <?php
 use App\Http\Controllers\Client\CHomeController;
 ?>
-@if (isset($sliders))
+@if (isset($sliders) && count($sliders) > 0)
    <div class="slideshow-has-category">
     <div class="wrap-content d-flex">
-        @include('client.partials.categorymenu')
+        @if(isset($category_child))
+            @include('client.partials.categorymenu')
+        @endif
             <div class="slideshow">
                 <div class="wrap-content">
                     <div class="slick-slideshow">

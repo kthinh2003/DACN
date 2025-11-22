@@ -149,6 +149,14 @@ $func = new App\Helpers\Func();
                     </a>
                 </li>
                 @endif
+                <li class="nav-item">
+                    <a href="{{ route('author.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-feather"></i>
+                        <p class="text-capitalize">
+                            📚 Tác Giả
+                        </p>
+                    </a>
+                </li>
                 @if ($func->CheckPermissionAdmin($user->id, 'list_setting','edit_setting'))
                 <li class="nav-item">
                     <a href="{{ route('setting.index') }}" class="nav-link">

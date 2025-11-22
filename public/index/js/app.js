@@ -704,50 +704,110 @@ $(document).ready(function () {
     }
     const searchHandler = debounce(function () {
         const query = $("#search-input").val();
-            urlProduct= "http://127.0.0.1:8000/product/";
+        const searchType = $("#search-type").val();
+        
         if (query.length > 1) {
-            $.ajax({
-                url: "/search-product",
-                method: "GET",
-                data: { q: query },
-                beforeSend: function () {
-                    $("#loading").show();
-                },
-                success: function (data) {
-                    $("#loading").hide();
-                    let html = "";
-                    if (data.length > 0) {
-                        data.forEach(product => {
-                            html += `
-                                    <div id="search-result">
-                                        <a href="${urlProduct}${product.id}">
-                                            <div class="product-info-result">
-                                                <span>${product.name}</span>
-                                            </div>
-                                        </a>
-                                    </div>
-                            `;
-                        });
-                    } else {
-                        html = "<p>Không tìm thấy kết quả phù hợp.</p>";
+            if (searchType === 'product') {
+                // Tìm kiếm sản phẩm
+                $.ajax({
+                    url: "/search-product",
+                    method: "GET",
+                    data: { q: query },
+                    beforeSend: function () {
+                        $("#loading").show();
+                    },
+                    success: function (data) {
+                        $("#loading").hide();
+                        let html = "";
+                        if (data.length > 0) {
+                            data.forEach(product => {
+                                html += `
+                                        <div id="search-result">
+                                            <a href="/product/${product.id}">
+                                                <div class="product-info-result">
+                                                    <span>${product.name}</span>
+                                                </div>
+                                            </a>
+                                        </div>
+                                `;
+                            });
+                        } else {
+                            html = "<p>Không tìm thấy kết quả phù hợp.</p>";
+                        }
+                        $("#search-result").html(html);
+                    },
+                    error: function () {
+                        $("#loading").hide();
+                        $("#search-result").html("<p>Đã xảy ra lỗi!</p>");
                     }
-                    $("#search-result").html(html);
-                },
-                error: function () {
-                    $("#loading").hide();
-                    $("#search-result").html("<p>Đã xảy ra lỗi!</p>");
-                }
-            });
+                });
+            } else if (searchType === 'author') {
+                // Tìm kiếm tác giả
+                $.ajax({
+                    url: "/search-author",
+                    method: "GET",
+                    data: { q: query },
+                    beforeSend: function () {
+                        $("#loading").show();
+                    },
+                    success: function (data) {
+                        $("#loading").hide();
+                        let html = "";
+                        if (data.length > 0) {
+                            data.forEach(author => {
+                                html += `
+                                        <div id="search-result" style="padding: 10px; border-bottom: 1px solid #eee; cursor: pointer;">
+                                            <a href="/author/${author.id}" style="text-decoration: none; color: inherit;">
+                                                <div class="product-info-result">
+                                                    <span style="font-weight: 600; color: ${author.color};">${author.name}</span>
+                                                    <br/>
+                                                    <span style="font-size: 12px; color: #999;">${author.subtitle}</span>
+                                                </div>
+                                            </a>
+                                        </div>
+                                `;
+                            });
+                        } else {
+                            html = "<p>Không tìm thấy tác giả phù hợp.</p>";
+                        }
+                        $("#search-result").html(html);
+                    },
+                    error: function () {
+                        $("#loading").hide();
+                        $("#search-result").html("<p>Đã xảy ra lỗi!</p>");
+                    }
+                });
+            }
         } else {
             $("#search-result").html("");
         }
     }, 300);
 
     $("#search-input").on("keyup", searchHandler);
+    
+    // Xử lý khi thay đổi loại tìm kiếm
+    $("#search-type").on("change", function() {
+        $("#search-input").val("");
+        $("#search-result").html("");
+        const newPlaceholder = $(this).val() === 'product' ? 'Tìm kiếm sản phẩm...' : 'Tìm kiếm tác giả...';
+        $("#search-input").attr('placeholder', newPlaceholder);
+    });
+    
+    // Xử lý form submit
+    $("#search-form").on("submit", function(e) {
+        e.preventDefault();
+        const query = $("#search-input").val();
+        const searchType = $("#search-type").val();
+        
+        if (query.length > 0) {
+            if (searchType === 'product') {
+                window.location.href = '/search-product?q=' + encodeURIComponent(query);
+            } else if (searchType === 'author') {
+                window.location.href = '/search-author?q=' + encodeURIComponent(query);
+            }
+        }
+    });
 });
-
-
-$(document).ready(function () {
     $('#cart-province').on('change', function () {
         var provinceId = $(this).val();
         if (provinceId != 0) {

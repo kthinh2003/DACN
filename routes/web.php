@@ -14,7 +14,7 @@ use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ImportOrderController;
 use App\Http\Controllers\Admin\PhotoController;
 use App\Http\Controllers\Admin\NewsController;
-use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\AuthorController;
 
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\Client\CCartController;
@@ -46,6 +46,7 @@ Route::prefix('/')->group(function () {
     /* Search */
     Route::controller(CProductController::class)->group(function () {
         Route::get('/search-product', 'search')->name('product.search');
+        Route::get('/search-author', 'searchAuthor')->name('author.search');
     });
 
     /* News */
@@ -53,6 +54,18 @@ Route::prefix('/')->group(function () {
         Route::get('/news', 'index')->name('news');
         Route::get('/news/{id}', [CNewsController::class, 'detail'])->name('news.detail');
     });
+
+    /* Poetry */
+    Route::get('/poetry', function () {
+        return view('client.poetry');
+    })->name('poetry');
+
+    /* Authors */
+    Route::get('/authors', [App\Http\Controllers\Client\CAuthorController::class, 'index'])->name('authors');
+    
+    Route::get('/author/{id}', [App\Http\Controllers\Client\CAuthorController::class, 'detail'])->name('author.detail');
+    Route::get('/search-author', [App\Http\Controllers\Client\CAuthorController::class, 'search']);
+
 
     /* Product */
     Route::controller(CProductController::class)->group(function () {
@@ -125,6 +138,17 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
             Route::get('/edit/{id}', [PublisherController::class, 'edit'])->name('publisher.edit')->middleware('can:publisher-edit');
             Route::post('/update/{id}', [PublisherController::class, 'update'])->name('publisher.update');
             Route::get('/delete/{id}', [PublisherController::class, 'delete'])->name('publisher.delete')->middleware('can:publisher-delete');
+        });
+
+        /* Author */
+        Route::prefix('author')->group(function () {
+            Route::get('', [AuthorController::class, 'index'])->name('author.index');
+            Route::get('/create', [AuthorController::class, 'create'])->name('author.create');
+            Route::post('/store', [AuthorController::class, 'store'])->name('author.store');
+            Route::get('/edit/{id}', [AuthorController::class, 'edit'])->name('author.edit');
+            Route::post('/update/{id}', [AuthorController::class, 'update'])->name('author.update');
+            Route::get('/delete/{id}', [AuthorController::class, 'delete'])->name('author.delete');
+            Route::get('/restore/{id}', [AuthorController::class, 'restore'])->name('author.restore');
         });
 
 

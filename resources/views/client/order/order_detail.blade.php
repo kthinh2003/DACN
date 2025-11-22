@@ -42,19 +42,19 @@
                         </div>
                     </div>
                     @php
-                        $province = DB::table('table_provinces')
-                            ->where('id', $hdb[0]->province)
-                            ->get();
-                        $districts = DB::table('table_districts')
-                            ->where('id', $hdb[0]->distrist)
-                            ->get();
-                        $ward = DB::table('table_wards')
-                            ->where('id', $hdb[0]->ward)
-                            ->get();
-                        $statusOrder = DB::table('table_order_status')
-                            ->where('id', $hdb[0]->status)
-                            ->get();
-
+                        $hdbItem = $hdb[0] ?? null;
+                        $province = $hdbItem ? DB::table('table_provinces')
+                            ->where('id', $hdbItem->province)
+                            ->get() : collect();
+                        $districts = $hdbItem ? DB::table('table_districts')
+                            ->where('id', $hdbItem->distrist)
+                            ->get() : collect();
+                        $ward = $hdbItem ? DB::table('table_wards')
+                            ->where('id', $hdbItem->ward)
+                            ->get() : collect();
+                        $statusOrder = $hdbItem ? DB::table('table_order_status')
+                            ->where('id', $hdbItem->status)
+                            ->get() : collect();
                     @endphp 
                     <div class="col-md-9">
                         <div class="box-form">
@@ -84,7 +84,7 @@
                                                 <td>{{ $item->code }}</td>
                                                 <td>{{ $item->name }}</td>
                                                 <td>{{ $item->quantity }}</td>
-                                                <td>{{ $statusOrder[0]->name }}</td>
+                                                <td>{{ $statusOrder[0]->name ?? '-' }}</td>
                                                 @if ($item->sale_price > 0)
                                                     <td>@formatmoney($item->sale_price)</td>
                                                 @else
@@ -95,13 +95,13 @@
                                     </tbody>
                                 </table>
                                 <div class="d-flex justify-content-between py-3">
-                                    <div class="title-name2"><strong>Tạm tính:</strong> @formatmoney($hdb[0]->total_price - 30000)</div>
+                                    <div class="title-name2"><strong>Tạm tính:</strong> @formatmoney(($hdbItem?->total_price ?? 0) - 30000)</div>
                                     <div class="title-name2"><strong>Phí ship:</strong> @formatmoney(30000)</div>
-                                    <div class="title-name2"><strong>Tổng tiền:</strong> @formatmoney($hdb[0]->total_price)</div>
+                                    <div class="title-name2"><strong>Tổng tiền:</strong> @formatmoney($hdbItem?->total_price ?? 0)</div>
                                 </div>
                             </div>
                             <div class="d-flex justify-content-end">
-                                @if($hdb[0]->status == 1 || $hdb[0]->status == 2 || $hdb[0]->status == 3)
+                                @if($hdbItem && ($hdbItem->status == 1 || $hdbItem->status == 2 || $hdbItem->status == 3))
                                     {{-- <button class="btn btn-danger mt-2 cancel-order-button"
                                         data-url = "{{route('user.order.cancel',['id'=> $hdb[0]->id])}}">Hủy đơn hàng</button> --}}
                                         <button class="btn btn-danger mt-2" id="cancelOrderButton">Hủy đơn hàng</button> 

@@ -4,9 +4,9 @@
             <div class="col-md-12 text-left">
                 <ol class="breadcrumb  breadcrumb-item-none ">
                     <li class="breadcrumb-item">
-                        <a href="#">{{ $name }}</a>
+                        <a href="#">{{ $name ?? 'Trang Chủ' }}</a>
                     </li>
-                    <li class="breadcrumb-item active ">{{ $key }}</li>
+                    <li class="breadcrumb-item active ">{{ $key ?? 'Chi Tiết' }}</li>
                 </ol>
             </div>
         </div>

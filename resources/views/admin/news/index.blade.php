@@ -1,24 +1,13 @@
+@extends('admin.layouts.app')
+
+@section('title', 'Quản Lý Bài Viết')
+
+@section('content')
 <?php
 $func = new App\Helpers\Func();
 ?>
-@extends('admin.layout.head') @section('title')
-    <title>Bài viết</title>
-    @endsection @section('content')
-@section('css')
-    <link href="{{ asset('vendors/bootstrap/bootstrap.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('/admins/css/style.css') }}">
-@endsection
-@section('js')
-    <script type="text/javascript">
-        var PERMISSION = @php echo $func->CheckPermissionAdmin(session()->get('user')['id'], 'delete_news')?'"true"':'"false"' @endphp;
-    </script>
-    <script src="{{ asset('vendors/sweetarlert2/sweetarlert2.js') }}"></script>
-    <script src="{{ asset('vendors/simplenotify/simple-notify.js') }}"></script>
-    <script src="{{ asset('/admins/js/app.js') }}"></script>
-@endsection
-<div class="content-wrapper bg-white">
-    <div class="content">
-        <div class="container-fluid pt-3">
+
+<div class="container-fluid pt-3">
             @if ($func->CheckPermissionAdmin(session()->get('user')['id'], 'add_news')) 
             <div class="w-100 card card-primary card-outline text-sm">
                 <div class="col-md-6">
@@ -83,7 +72,5 @@ $func = new App\Helpers\Func();
             </div>
         </div>
     </div>
-</div>
-
 
 @endsection

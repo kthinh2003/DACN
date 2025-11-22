@@ -1,18 +1,10 @@
-@extends('admin.layout.head') @section('title')
-    <title>Sửa Bài viết</title>
-    @endsection @section('content')
-@section('css')
-    <link href="{{ asset('vendors/summernote/summernote.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('vendors/bootstrap/bootstrap.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('/admins/css/style.css') }}">
-@endsection
-@section('js')
-    <script src="{{ asset('vendors/summernote/summernote.min.js') }}"></script>
-    <script src="{{ asset('/admins/js/app.js') }}"></script>
-@endsection
-<div class="content-wrapper bg-white">
-     <div class="content">
-        <div class="container-fluid pt-3">
+@extends('admin.layouts.app')
+
+@section('title', 'Sửa Bài Viết')
+
+@section('content')
+
+<div class="container-fluid pt-3">
             <form action="{{ route('news.update', ['id' => $news->id]) }} " method="POST" enctype="multipart/form-data">
                 <div class="card card-primary card-outline text-sm sticky-top">
                     <div class="d-flex px-3 py-1 my-2 ">
@@ -116,8 +108,5 @@
             </form>
         </div>
     </div>
-
-</div>
-
 
 @endsection

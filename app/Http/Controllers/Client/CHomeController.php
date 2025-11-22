@@ -18,6 +18,9 @@ class CHomeController extends Controller
     public static function settings()
     {
         $settings = SettingModel::select('*')->first();
+        if (!$settings) {
+            $settings = new SettingModel(['name' => 'Website']);
+        }
         return $settings;
     }
     public function index()
