@@ -27,7 +27,19 @@ class CProductController extends Controller
 
     public function detail($id)
     {
-        $productDetail = ProductModel::find($id);
+        $productDetail = ProductModel::with(['authorModel', 'category', 'publisher', 'productGallery'])->find($id);
+        
+        // If product has author text but no id_author, try to find and link it
+        if (!$productDetail->id_author && $productDetail->author) {
+            $author = \App\Models\AuthorModel::where('name', $productDetail->author)->first();
+            if ($author) {
+                $productDetail->id_author = $author->id;
+                $productDetail->save();
+                // Reload the relationship
+                $productDetail->load('authorModel');
+            }
+        }
+        
         $pageName = $productDetail->name;
         $qty = WarehouseModel::where('id_parent', $id)->value('quantity');
         $cart = session()->get('cart', []);

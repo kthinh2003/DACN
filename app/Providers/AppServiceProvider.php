@@ -5,7 +5,9 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Schema; 
+use Illuminate\Support\Facades\View;
 use App\Models\User;
+use App\Models\PhotoModel;
 use Illuminate\Auth\Access\Response;
 use Illuminate\Support\Facades\Gate;
 
@@ -37,5 +39,13 @@ class AppServiceProvider extends ServiceProvider
         }
 
         Schema::defaultStringLength(191);
+
+        // Share banner globally for all client views
+        View::composer('client.*', function ($view) {
+            $banner = PhotoModel::select('name', 'desc', 'photo_path')
+                ->where('type', 'banner')
+                ->get();
+            $view->with('banner', $banner);
+        });
     }
 }

@@ -354,27 +354,27 @@ function AllRun() {
                         if (response.products && response.products.length > 0) {
                             response.products.forEach(function (product) {
                                 var priceComponent = "";
-                                var sale_price = formatMoney(
-                                    product.sale_price
-                                );
-                                var regular_price = formatMoney(
-                                    product.regular_price
-                                );
-                                if (product.sale_price) {
-                                    priceComponent = `<div class="price-product">
-                                                        <div class="price-new"> ${sale_price}</div>
-                                                        <div class="price-old">${regular_price} </div>
-                                                        <div class="discount">${product.discount}%</div>
-                                                    </div>`;
-                                } else if (product.regular_price) {
-                                    priceComponent = `<div class="price-product">
-                                                        <div class="price-new">${regular_price}</div>
-                                                    </div>`;
-                                } else {
-                                    priceComponent = `<div class="price-product">
-                                                        <div class="price-new">Liên hệ</div>
-                                                    </div>`;
-                                }
+                                // var sale_price = formatMoney(
+                                //     product.sale_price
+                                // );
+                                // var regular_price = formatMoney(
+                                //     product.regular_price
+                                // );
+                                // if (product.sale_price) {
+                                //     priceComponent = `<div class="price-product">
+                                //                         <div class="price-new"> ${sale_price}</div>
+                                //                         <div class="price-old">${regular_price} </div>
+                                //                         <div class="discount">${product.discount}%</div>
+                                //                     </div>`;
+                                // } else if (product.regular_price) {
+                                //     priceComponent = `<div class="price-product">
+                                //                         <div class="price-new">${regular_price}</div>
+                                //                     </div>`;
+                                // } else {
+                                //     priceComponent = `<div class="price-product">
+                                //                         <div class="price-new">Liên hệ</div>
+                                //                     </div>`;
+                                // }
                                 productHtml += `
                                 <div class="product-item product-slick-item" data-id="${
                                     product.id

@@ -2,7 +2,7 @@
 $func = new App\Helpers\Func();  
 ?>
 @extends('admin.layout.head') @section('title')
-    <title>Danh Sách Nhân Viên</title>
+    <title>Danh Sách Quản Lý</title>
     @endsection @section('content')
 @section('css')
     <link href="{{ asset('vendors/select2/select2.min.css') }}" rel="stylesheet" />

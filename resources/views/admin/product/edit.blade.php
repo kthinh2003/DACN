@@ -15,6 +15,16 @@
     <script src="{{ asset('vendors/summernote/summernote.min.js') }}"></script>
     <script src="{{ asset('vendors/bootstrap/bootstrap.js') }}"></script>
     <script src="{{ asset('/admins/js/app.js') }}"></script>
+    <script>
+        // Auto-fill author name when selecting from dropdown
+        document.getElementById('id_author').addEventListener('change', function() {
+            const selectedOption = this.options[this.selectedIndex];
+            const authorNameInput = document.getElementById('author_text');
+            if (this.value && selectedOption.text !== '-- Chọn tác giả từ danh sách --') {
+                authorNameInput.value = selectedOption.text.trim();
+            }
+        });
+    </script>
 @endsection
 
 @section('content')
@@ -125,10 +135,27 @@
                                                     <input type="number" class="form-control format-price regular_price"
                                                         name="regular_price" value="{{ $product->regular_price }}">
                                                 </div>
-                                                <div class="form-group col-md-6">
-                                                    <label>Tác giả:</label>
+                                                <div class="form-group col-md-12">
+                                                    <label>Chọn Tác giả:</label>
+                                                    <select class="form-control @error('id_author') is-invalid @enderror" name="id_author" id="id_author">
+                                                        <option value="">-- Chọn tác giả từ danh sách --</option>
+                                                        @foreach ($authors as $author)
+                                                            <option value="{{ $author->id }}" 
+                                                                {{ old('id_author', $product->id_author) == $author->id ? 'selected' : '' }}>
+                                                                {{ $author->name }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                    @error('id_author')
+                                                        <div class="alert alert-danger">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+                                                <div class="form-group col-md-12">
+                                                    <label>Hoặc nhập tên tác giả (nếu chưa có trong danh sách):</label>
                                                     <input type="text" class="text-capitalize form-control"
-                                                        name="author" value="{{ $product->author }}">
+                                                        name="author" placeholder="Nhập tên tác giả"
+                                                        value="{{ old('author', $product->author) }}" id="author_text">
+                                                    <small class="text-muted">Lưu ý: Nếu chọn tác giả từ dropdown, tên tác giả sẽ được tự động điền.</small>
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                     <label>Năm xuất bản:</label>

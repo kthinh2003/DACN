@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\ProductController; 
 use App\Http\Controllers\Admin\ProductListController; 
 use App\Http\Controllers\Admin\PublisherController; 
+use App\Http\Controllers\Admin\AuthorController;
 use App\Http\Controllers\Admin\UserController; 
 use App\Http\Controllers\Admin\MemberController; 
 use App\Http\Controllers\Admin\RoleController; 
@@ -59,6 +60,12 @@ Route::prefix('/')->group(function () {
         Route::get('/product/{id}', [CProductController::class, 'detail'])->name('product.detail');
         Route::get('/product/{id}/buy-now', 'add')->name('product.add');
         
+    });
+    
+    /* Author */
+    Route::controller(\App\Http\Controllers\Client\CAuthorController::class)->group(function () {
+        Route::get('/authors', 'index')->name('author.index');
+        Route::get('/author/{id}', 'detail')->name('author.detail');
     });
     });
 
@@ -145,6 +152,16 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
             Route::get('/edit/{id}', [PublisherController::class, 'edit'])->name('publisher.edit')->middleware('can:publisher-edit');
             Route::post('/update/{id}', [PublisherController::class, 'update'])->name('publisher.update');
             Route::get('/delete/{id}', [PublisherController::class, 'delete'])->name('publisher.delete')->middleware('can:publisher-delete');
+        });
+
+        /* Author */
+        Route::prefix('author')->group(function () {
+            Route::get('', [AuthorController::class, 'index'])->name('author.index');
+            Route::get('/create', [AuthorController::class, 'create'])->name('author.create');
+            Route::post('/store', [AuthorController::class, 'store'])->name('author.store');
+            Route::get('/edit/{id}', [AuthorController::class, 'edit'])->name('author.edit');
+            Route::post('/update/{id}', [AuthorController::class, 'update'])->name('author.update');
+            Route::get('/delete/{id}', [AuthorController::class, 'delete'])->name('author.delete');
         });
 
         /* Category */

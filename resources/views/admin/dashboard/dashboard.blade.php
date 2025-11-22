@@ -1,4 +1,4 @@
-@php
+<!-- @php
     $year_now = (int) date('Y', time());
 @endphp
 @extends('admin.layout.head') @section('title')
@@ -85,7 +85,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="card-title">Thống kê</h5>
+                            <!-- <h5 class="card-title">Thống kê</h5> -->
 
                             <div class="card-tools">
                                 <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -120,9 +120,9 @@
                                         @endfor
                                     </select>
                                 </div>
-                                <div class="col-2">
+                                <!-- <div class="col-2">
                                     <button type="button" id="btn-filter" class="btn btn-success">Thống kê</button>
-                                </div>
+                                </div> -->
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
@@ -203,4 +203,4 @@
             </div>
         </div>
     </div>
-@endsection
+@endsection -->

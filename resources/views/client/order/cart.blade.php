@@ -4,7 +4,7 @@
 use App\Models\WarehouseModel;
 ?>
 @section('title')
-    <title>Giỏ hàng</title>
+    <title></title>
 @endsection
 
 @section('content')

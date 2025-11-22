@@ -3,7 +3,11 @@ use App\Http\Controllers\Client\CHomeController;
 ?>
 <div class="header">
     <div class="header-top">
-        <img src="{{$banner[0]->photo_path}}" alt="banner" width="100%">
+        @if(isset($banner) && $banner->count() > 0)
+            <img src="{{$banner[0]->photo_path}}" alt="banner" width="100%">
+        @else
+            <img src="{{ asset('assets/noimage.jpg') }}" alt="banner" width="100%">
+        @endif
     </div>
     <div class="header-bottom">
         <div class="wrap-content">
@@ -34,10 +38,10 @@ use App\Http\Controllers\Client\CHomeController;
                     </div>
                 </div>
                 <div class="header-bottom-end">
-                    <a class="header-bottom-item" href="{{route('user.cart')}}">
+                    <!-- <a class="header-bottom-item" href="{{route('user.cart')}}">
                         <i class="fa-regular fa-cart-shopping"></i>
                         <h6>Giỏ hàng</h6>
-                    </a>
+                    </a> -->
                     <a class="header-bottom-item" href="{{route('user.info')}}">
                         <i class="fa-solid fa-user"></i>
                         <h6>Tài khoản</h6>

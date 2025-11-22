@@ -59,11 +59,11 @@ $func = new App\Helpers\Func();
                                         <td class="text-capitalize">{{ $role->display_name }}</td>
 
                                         <td>
-                                            @if ($func->CheckPermissionAdmin(session()->get('user')['id'], 'edit_member'))
+                                            @if ($func->CheckPermissionAdmin(session()->get('user')['id'], 'edit_role'))
                                                 <a href="{{ route('roles.edit', ['id' => $role->id]) }}"
                                                     class="btn btn-default">Sửa</a>
                                             @endif
-                                            @if ($func->CheckPermissionAdmin(session()->get('user')['id'], 'delete_member'))
+                                            @if ($func->CheckPermissionAdmin(session()->get('user')['id'], 'delete_role'))
                                                 <a href=" "
                                                     data-url="{{ route('roles.delete', ['id' => $role->id]) }} "
                                                     class="btn btn-danger action_delete">Xóa</a>

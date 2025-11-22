@@ -47,6 +47,14 @@ $func = new App\Helpers\Func();
                             </a>
                         </li>
                         @endif
+                        <li class="nav-item">
+                            <a href="{{ route('author.index') }}" class="nav-link">
+                                <i class="nav-icon fas fa-user-edit"></i>
+                                <p class="text-capitalize">
+                                    Tác Giả
+                                </p>
+                            </a>
+                        </li>
                         @if ($func->CheckPermissionAdmin($user->id, 'list_product'))
                         <li class="nav-item">
                             <a href="{{ route('product.index') }}" class="nav-link ">
@@ -58,20 +66,20 @@ $func = new App\Helpers\Func();
                         </li>
                         @endif
                         @if ($func->CheckPermissionAdmin($user->id, 'list_warehouse'))
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a href="{{ route('warehouse.index') }}" class="nav-link ">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p class="text-capitalize">
                                     Quản lý kho
                                 </p>
                             </a>
-                        </li>
+                        </li> -->
                         @endif
                     </ul>
                 </li>
                 @endif
                 @if ($func->CheckPermissionAdmin($user->id, 'list_order', 'list_import_order'))
-                <li class="nav-item ">
+                <!-- <li class="nav-item ">
                     <a href="#" class="nav-link">
                         <i class="nav-icon text-sm fas fa-layer-group"></i>
                         <p class="text-capitalize">
@@ -101,7 +109,7 @@ $func = new App\Helpers\Func();
                         </li>
                         @endif 
                     </ul>
-                </li>
+                </li> -->
                 @endif
                 @if ($func->CheckPermissionAdmin($user->id, 'list_user,list_role','list_member'))
                 <li class="nav-item ">
@@ -118,7 +126,7 @@ $func = new App\Helpers\Func();
                             <a href="{{ route('users.index') }}" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p class="text-capitalize">
-                                    Danh Sách Nhân Viên
+                                    Danh Sách Quản Lý
                                 </p>
                             </a>
                         </li>

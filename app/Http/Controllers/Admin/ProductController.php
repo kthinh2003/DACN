@@ -13,6 +13,7 @@ use App\Models\ProductListModel;
 use App\Models\ProductModel; 
 use App\Models\GalleryModel;
 use App\Models\PublisherModel;
+use App\Models\AuthorModel;
 use App\Models\WarehouseModel;
 use App\Traits\DeleteModelTrait;
 use App\Traits\StorageImageTrait;
@@ -120,7 +121,8 @@ class ProductController extends Controller
     {
         $htmlOption = $this->getCategory($parentId = '');
         $publishers = $publisherController->getPublishers();
-        return view('admin.product.add', compact('htmlOption', 'publishers'));
+        $authors = AuthorModel::select('id', 'name')->whereNull('deleted_at')->orderBy('name', 'asc')->get();
+        return view('admin.product.add', compact('htmlOption', 'publishers', 'authors'));
 
     }
     public function getCategory($parentId)
@@ -134,6 +136,15 @@ class ProductController extends Controller
     { 
         try { 
             DB::beginTransaction();
+            // Get author name if id_author is provided
+            $authorName = null;
+            if ($request->id_author) {
+                $author = AuthorModel::find($request->id_author);
+                $authorName = $author ? $author->name : ($request->author ?? null);
+            } else {
+                $authorName = $request->author ?? null;
+            }
+
             $dataProductCreate = [
                 'name' => $request->name,
                 'id_list' => $request->id_list ?? null,
@@ -143,7 +154,8 @@ class ProductController extends Controller
                 'sale_price' => $request->sale_price ?? null,
                 'discount' => $request->discount ?? null,
                 'id_publisher' => $request->id_publisher ?? null,
-                'author' => $request->author ?? null,
+                'id_author' => $request->id_author ?? null,
+                'author' => $authorName,
                 'code' => $request->code ?? null,
                 'publishing_year' => $request->publishing_year ?? '',
                 'status' => $request->filled('status') ? $request->status : false,
@@ -188,14 +200,24 @@ class ProductController extends Controller
         
         $product = ProductModel::find($id);
         $publishers = PublisherModel::all();
+        $authors = AuthorModel::select('id', 'name')->whereNull('deleted_at')->orderBy('name', 'asc')->get();
         $htmlOption = $this->getCategory($product['id_list']);
-        return view('admin.product.edit', compact('htmlOption', 'product', 'publishers'));
+        return view('admin.product.edit', compact('htmlOption', 'product', 'publishers', 'authors'));
     }
 
     public function update(ProductEditRequest $request, $id)
     {  
         try {
             DB::beginTransaction();
+            // Get author name if id_author is provided
+            $authorName = null;
+            if ($request->id_author) {
+                $author = AuthorModel::find($request->id_author);
+                $authorName = $author ? $author->name : ($request->author ?? null);
+            } else {
+                $authorName = $request->author ?? null;
+            }
+
             $dataProductUpdate = [
                 'id_list' => $request->id_list,
                 'name' => $request->name,
@@ -205,7 +227,8 @@ class ProductController extends Controller
                 'sale_price' => $request->sale_price,
                 'discount' => $request->discount,
                 'id_publisher' => $request->id_publisher,
-                'author' => $request->author,
+                'id_author' => $request->id_author ?? null,
+                'author' => $authorName,
                 'code' => $request->code,
                 'publishing_year' => $request->publishing_year,
                 'status' => $request->filled('status') ? $request->status : false,

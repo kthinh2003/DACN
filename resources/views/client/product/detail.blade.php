@@ -50,7 +50,17 @@
                             Danh mục: <a class="attribute-product-detail-text-link">{{ $productDetail->category->name }}</a>
                         </div>
                         <div class="attribute-product-detail">
-                            Tác giả: <a class="attribute-product-detail-text-link">{{ $productDetail->author }}</a>
+                            Tác giả: 
+                            @if($productDetail->id_author && $productDetail->authorModel)
+                                <a class="attribute-product-detail-text-link" href="{{ route('author.detail', ['id' => $productDetail->id_author]) }}" style="color: #007bff; text-decoration: underline;">
+                                    {{ $productDetail->authorModel->name }}
+                                </a>
+                            @elseif($productDetail->author)
+                                <span class="attribute-product-detail-text">{{ $productDetail->author }}</span>
+                                <small class="text-muted d-block">(Chưa liên kết với tác giả trong hệ thống)</small>
+                            @else
+                                <span class="attribute-product-detail-text">N/A</span>
+                            @endif
                         </div>
                         <div class="attribute-product-detail">
                             Nhà xuất bản: <a class="attribute-product-detail-text-link"
@@ -61,49 +71,8 @@
                             Năm xuất bản: <span
                                 class="attribute-product-detail-text">{{ $productDetail->publishing_year }}</span>
                         </div>
-                        <div class="attribute-product-detail">
-                            Số lượng tồn kho: <span class="attribute-product-detail-text"
-                                id="qty_shown">{{ $qty }}</span>
-                        </div>
-                        <input type="hidden" id="qty" value="{{ $qty }}">
-                        <div class="attribute-product-detail" style="display: none">
-                            Số lượng có trong giỏ hàng: <span id="cqty_shown">{{ $cqtyincart }}</span>
-                        </div>
-                        <input type="hidden" id="cqty" value="{{ $cqtyincart }}">
-                        <div class="price-product-detail">
-                            Giá:
-                            @if ($productDetail->sale_price)
-                                <span class="price-new-product-detail">
-                                    {{ \App\Helpers\Func::formatMoney($productDetail->sale_price) }}</span> <span
-                                    class="price-old-product-detail">
-                                    {{ \App\Helpers\Func::formatMoney($productDetail->regular_price) }}</span>
-                            @else
-                                <span class="price-new-product-detail">
-                                    {{ \App\Helpers\Func::formatMoney($productDetail->regular_price) }}</span>
-                            @endif
-                        </div>
                         <div class="desc-product-detail">
                             {!! $productDetail->description !!}
-                        </div>
-                        <div class="d-flex flex-wrap align-items-center mt-3 mb-3">
-                            <label class="attr-label-pro-detail d-block me-2 mb-0">Số lượng:</label>
-                            <div class="attr-content-pro-detail d-flex flex-wrap align-items-center justify-content-between">
-                                <div class="quantity-pro-detail">
-                                    <span class="quantity-minus-pro-detail">-</span>
-                                    <input type="number" id="qty_product" class="qty-pro" min="1" value="1" data-max-quantity="{{ $qty }}" />
-                                    <span class="quantity-plus-pro-detail">+</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="cart-pro-detail d-flex flex-wrap align-items-center justify-content-between">
-                                <a class="transition buynow addcart text-decoration-none d-flex align-items-center justify-content-center add-to-cart"
-                                   href="#" data-route="{{ route('add_index.cart', ['id' => $productDetail->id]) }}"
-                                   data-quantity="{{$qty}}"><i class="bi bi-basket2"></i><span>Thêm vào giỏ hàng</span></a>
-                                <a class="transition buynow addcart text-decoration-none d-flex align-items-center justify-content-center add-to-cart"
-                                   href="#" data-route="{{ route('add_index.cart', ['id' => $productDetail->id]) }}"
-                                   data-act="buynow" data-direct="{{ route('user.cart') }}" data-quantity="{{$qty}}"><i class="bi bi-cart2"></i><span>Mua ngay</span></a>
-                            </div>
                         </div>
                         
                     </div> 

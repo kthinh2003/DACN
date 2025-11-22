@@ -21,6 +21,7 @@ class ProductModel extends Model
         'sale_price',
         'discount',
         'id_publisher',
+        'id_author',
         'author',
         'code',
         'publishing_year',
@@ -42,6 +43,11 @@ class ProductModel extends Model
     public function publisher()
     {
         return $this->belongsTo(PublisherModel::class, 'id_publisher');        
+    }
+    
+    public function authorModel()
+    {
+        return $this->belongsTo(AuthorModel::class, 'id_author');
     }
    
     public function productGallery()
