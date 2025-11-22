@@ -20,14 +20,15 @@
     {{-- <script src="{{ asset('/adminlte/dist/js/pages/dashboard2.js') }}"></script> --}}
     <script src="{{ asset('/adminlte/plugins/chart.js/Chart.min.js') }}"></script>
     <script src="{{ asset('/admins/js/app.js') }}"></script>
-    <script type="text/javascript">
+    {{-- <script type="text/javascript">
         const profitBaseOnDate = @php echo json_encode($profitBaseOnDate) @endphp;
-    </script>
+    </script> --}}
 @endsection
 <div class="content-wrapper bg-white">
     <div class="content">
         <div class="container-fluid">
-            <div class="row pt-3">
+            <h3> Thống kê</h3>
+            {{-- <div class="row pt-3">
                 <div class="col-12 col-sm-6 col-md-3">
                     <div class="info-box">
                         <span class="info-box-icon bg-info elevation-1"><i class="fas fa-list"></i></span>
@@ -200,7 +201,7 @@
                     </div>
                     <!-- /.card -->
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 @endsection

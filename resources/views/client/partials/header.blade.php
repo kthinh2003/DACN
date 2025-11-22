@@ -2,16 +2,16 @@
 use App\Http\Controllers\Client\CHomeController;
 ?>
 <div class="header">
-    <div class="header-top">
+    {{-- <div class="header-top">
         <img src="{{$banner[0]->photo_path}}" alt="banner" width="100%">
-    </div>
-    <div class="header-bottom">
+    </div> --}}
+    <div class="header-bottom" style="background-color: #FFA500; padding: 10px 0;">
         <div class="wrap-content">
             <div class="flex-header-bottom">
                 <div class="header-bottom-logo peShiner">
                     <a href="{{route('index')}}">
-                        <div class="main-logo" style="margin-top: 10px">
-                            <img src="{{ CHomeController::settings()->logo_path }}" alt="TP-Store" width="200px" height="200px">
+                        <div class="main-logo" style="margin-top: 5px; margin-bottom: 5px;">
+                            <img src="{{ CHomeController::settings()->logo_path }}" alt="Books" width="120px" height="120px">
                         </div>
                     </a>
                 </div>
@@ -27,17 +27,13 @@ use App\Http\Controllers\Client\CHomeController;
                                     </button>
                             </div>
                         </form>
-                        
+
                         <div id="search-result" class="search-result-list">
                             <div id="loading" class="search-loading loading-spinner">Đang tìm kiếm...</div>
-                        </div> 
+                        </div>
                     </div>
                 </div>
                 <div class="header-bottom-end">
-                    <a class="header-bottom-item" href="{{route('user.cart')}}">
-                        <i class="fa-regular fa-cart-shopping"></i>
-                        <h6>Giỏ hàng</h6>
-                    </a>
                     <a class="header-bottom-item" href="{{route('user.info')}}">
                         <i class="fa-solid fa-user"></i>
                         <h6>Tài khoản</h6>

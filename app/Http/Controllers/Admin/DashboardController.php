@@ -2,13 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\ProductListModel;
-use App\Models\ImportOrderModel;
-use App\Models\ImportOrderDetailModel;
 use App\Models\OrderModel;
-use App\Models\OrderDetailModel;
-use App\Models\OrderStatusModel;
-use App\Models\ProductModel;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -22,41 +16,41 @@ class DashboardController extends Controller
         if ($user == null) {
             return redirect()->route('admin.login');
         }
-        $product = ProductModel::get();
-        $hdball = OrderModel::get();
-        $cthdb = OrderDetailModel::get();
-        $hdn = ImportOrderModel::get();
-        $cthdn = ImportOrderDetailModel::get();
-        $category = ProductListModel::get();
+        // $product = ProductModel::get();
+        // $hdball = OrderModel::get();
+        // $cthdb = OrderDetailModel::get();
+        // $hdn = ImportOrderModel::get();
+        // $cthdn = ImportOrderDetailModel::get();
+        // $category = ProductListModel::get();
 
-        $total_sale = 0;
-        $profitBaseOnDate = array();
-        $now = Carbon::now();
-        $daysInMonth = Carbon::createFromDate(null, $now->month, 1)->daysInMonth;
-        $monthStart = Carbon::create($now->year, $now->month, 1, 0, 0, 0);
-        $monthEnd = Carbon::create($now->year, $now->month, $daysInMonth, 23, 59, 59);
+        // $total_sale = 0;
+        // $profitBaseOnDate = array();
+        // $now = Carbon::now();
+        // $daysInMonth = Carbon::createFromDate(null, $now->month, 1)->daysInMonth;
+        // $monthStart = Carbon::create($now->year, $now->month, 1, 0, 0, 0);
+        // $monthEnd = Carbon::create($now->year, $now->month, $daysInMonth, 23, 59, 59);
 
-        $hdb = OrderModel::whereIn('status', [2,3,4, 5])->whereBetween('created_at', [$monthStart, $monthEnd])->get();
-    
-        //tính tổng doanh thu
-        foreach ($hdb as $value) {
-            $total_sale = $total_sale + $value->total_price;
-        }
+        // $hdb = OrderModel::whereIn('status', [2,3,4, 5])->whereBetween('created_at', [$monthStart, $monthEnd])->get();
 
-        for ($i = 0; $i < $daysInMonth; $i++) {
-            $todayStart = Carbon::create($now->year, $now->month, $i + 1, 0, 0, 0);
-            $todayEnd = Carbon::create($now->year, $now->month, $i + 1, 23, 59, 59);
-            $temp = DB::table('table_order')->select('total_price')->where('created_at', '>=', $todayStart)->where('created_at', '<=', $todayEnd)->whereIn('status', [3, 5])->sum('total_price');
-            $profitBaseOnDate[$i] = $temp ? $temp : 0;
-        }
-        $status = OrderStatusModel::get();
-        $sold_pro = OrderModel::get();
+        // //tính tổng doanh thu
+        // foreach ($hdb as $value) {
+        //     $total_sale = $total_sale + $value->total_price;
+        // }
 
-        return view('admin.dashboard.dashboard', compact('product', 'hdb', 'hdball', 'hdn', 'category', 'total_sale', 'cthdb', 'sold_pro', 'cthdn', 'profitBaseOnDate', 'status'));
+        // for ($i = 0; $i < $daysInMonth; $i++) {
+        //     $todayStart = Carbon::create($now->year, $now->month, $i + 1, 0, 0, 0);
+        //     $todayEnd = Carbon::create($now->year, $now->month, $i + 1, 23, 59, 59);
+        //     $temp = DB::table('table_order')->select('total_price')->where('created_at', '>=', $todayStart)->where('created_at', '<=', $todayEnd)->whereIn('status', [3, 5])->sum('total_price');
+        //     $profitBaseOnDate[$i] = $temp ? $temp : 0;
+        // }
+        // $status = OrderStatusModel::get();
+        // $sold_pro = OrderModel::get();
+
+        return view('admin.dashboard.dashboard');
 
     }
     public function filter($month, $year)
-    { 
+    {
         $user = Auth::user();
         if ($user == null) {
             return redirect()->route('admin.login');

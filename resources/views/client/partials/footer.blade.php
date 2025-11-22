@@ -1,16 +1,16 @@
 <?php
 use App\Http\Controllers\Client\CHomeController;
 ?>
-<div class="footer">
-    <div class="footer-article py50 ">
+<div class="footer" style="background-color: #FFA500 !important;">
+    <div class="footer-article py50 " style="background-color: #FFA500 !important;">
         <div class="wrap-content">
             <div class="footer-row d-flex justify-content-between align-items-center">
                 <div class="footer-news">
-                    <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=61569640587376" data-tabs="timeline" 
+                    <div class="fb-page" data-href="https://www.facebook.com/thinh.phamkieu/" data-tabs="timeline"
                             data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
-                        <blockquote cite="https://www.facebook.com/profile.php?id=61569640587376" class="fb-xfbml-parse-ignore">
-                            <a href="https://www.facebook.com/profile.php?id=61569640587376">
-                                TP Store</a>
+                        <blockquote cite="https://www.facebook.com/thinh.phamkieu/" class="fb-xfbml-parse-ignore">
+                            <a href="https://www.facebook.com/thinh.phamkieu/">
+                                Books</a>
                     </blockquote>
                 </div>
                 </div>
@@ -24,7 +24,7 @@ use App\Http\Controllers\Client\CHomeController;
                                     {{ CHomeController::settings()->phone }}</a></span>
                         </div>
                         <div class="footer-info-item">
-                            <span>Email: <a href="mailto: {{ CHomeController::settings()->email }}"> 
+                            <span>Email: <a href="mailto: {{ CHomeController::settings()->email }}">
                                     {{ CHomeController::settings()->email }}</a></span>
                         </div>
                         <div class="footer-info-item">
@@ -36,7 +36,7 @@ use App\Http\Controllers\Client\CHomeController;
                         </div>
                     </div>
                     <div class="footer-social d-flex">
-                        <a class="footer-social-icon" href="https://www.facebook.com/profile.php?id=61569640587376">
+                        <a class="footer-social-icon" href="https://www.facebook.com/thinh.phamkieu/">
                             <i class="fa-brands fa-facebook"></i>
                         </a>
                         <a class="footer-social-icon" href="#">
@@ -48,34 +48,34 @@ use App\Http\Controllers\Client\CHomeController;
                     </div>
                     <div class="footer-paymet">
                         <h6 class="footer-payment-title">Phương thức thanh toán</h6>
-                        <div class="payment-list d-flex">                          
-                            <img src="../index/imgs/money.png" alt="Momo" width="50px" height="50px" style="margin:8px"> 
-                            <img src="../index/imgs/napas.png" alt="zalo-pay" width="50px" height="50px" style="margin:8px" > 
-                            <img src="../index/imgs/vn-pay.png" alt="vn-pay" width="50px" height="50px" style="margin:8px">                            
+                        <div class="payment-list d-flex">
+                            <img src="../index/imgs/money.png" alt="Momo" width="50px" height="50px" style="margin:8px">
+                            <img src="../index/imgs/napas.png" alt="zalo-pay" width="50px" height="50px" style="margin:8px" >
+                            <img src="../index/imgs/vn-pay.png" alt="vn-pay" width="50px" height="50px" style="margin:8px">
                         </div>
-                        <img src="../index/imgs/visa.png" alt="the-ngan-hang" width="100px" height="50px" style="margin:8px"> 
+                        <img src="../index/imgs/visa.png" alt="the-ngan-hang" width="100px" height="50px" style="margin:8px">
                     </div>
                 </div>
-               
+
                 <div class="footer-news">
                     <div class="footer-map">
                         <div class="footer-map-iframe">
                             {!! CHomeController::settings()->iframe_map !!}
                         </div>
                     </div>
-                   
+
                 </div>
             </div>
         </div>
     </div>
-    
-    <div class="footer-powered ">
+
+    <div class="footer-powered " style="background-color: #FFA500 !important;">
         <div class="wrap-content ">
             <div class="footer-copyright">Copyright © 2024 TP Bookstore. All rights reserved.
             </div>
         </div>
     </div>
-    
+
 </div>
 
 <div class="scrollToTop cursor-pointer active-progress">

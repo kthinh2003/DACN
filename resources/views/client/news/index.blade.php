@@ -14,16 +14,16 @@
         <div class="content-main">
             @isset($newsInternal)
                 @if (!$newsInternal->isEmpty())
-                    <div class="grid-news-internal">
+                    <div class="grid-news-internal" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px;">
                         @foreach ($newsInternal as $v)
                             <div class="news-box-in" data-aos="fade-up" data-aos-duration="1000">
-                                <a href="{{ route('news.detail', ['id' => $v->id]) }}">
+                                <a href="{{ route('news.detail', ['id' => $v->id]) }}" style="text-decoration: none; color: inherit;">
                                     <div class="news-box-in-img scale-img hover_light">
-                                        <img src="{{ $v->photo_path }}" alt="{{ $v->name }}" class="w-100">
+                                        <img src="{{ $v->photo_path }}" alt="{{ $v->name }}" class="w-100" style="height: 250px; object-fit: cover;">
                                     </div>
-                                    <div class="news-box-ex-info">
-                                        <div class="news-box-ex-name text-split-2"> {{ $v->name }}</div>
-                                        <div class="news-box-ex-desc text-split-3">{!! $v->description !!}</div>
+                                    <div class="news-box-ex-info" style="padding: 15px;">
+                                        <div class="news-box-ex-name" style="font-weight: bold; font-size: 14px; line-height: 1.4; margin-bottom: 10px;">{{ $v->name }}</div>
+                                        <div class="news-box-ex-desc" style="font-size: 12px; color: #666; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">{!! strip_tags($v->description) !!}</div>
                                     </div>
                                 </a>
                             </div>

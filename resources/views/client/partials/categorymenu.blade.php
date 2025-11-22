@@ -14,7 +14,7 @@ use App\Http\Controllers\Client\CHomeController;
         </div>
         <div class="category-drop-main">
             <ul class="category-drop-list">
-                @foreach ($category_child as $cate)
+                {{-- @foreach ($category_child as $cate)
                     <li class="category-drop-item">
                         <span class="category-drop-item-inner">
                             <a href="{{route('categoryid.categoryidproduct', ['id' => $cate->id])}}">
@@ -31,7 +31,7 @@ use App\Http\Controllers\Client\CHomeController;
                             </a>
                         </span>
                     </li>
-                @endforeach
+                @endforeach --}}
             </ul>
         </div>
     </div>

@@ -18,7 +18,7 @@
                     <div class="d-flex px-3 py-1 my-2 ">
                         <button type="submit" class="btn btn-primary submit-check mr-2">Lưu</button>
                         <button type="reset" class="btn btn-secondary mr-2">Làm lại</button>
-                        <a href="{{ route('product.index') }}" class="btn btn-danger">Thoát</a>
+                        <a href="{{ route('news.index') }}" class="btn btn-danger">Thoát</a>
                     </div>
                 </div>
                 @csrf
@@ -44,7 +44,7 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label>Mô Tả Bài viết</label> 
+                                    <label>Mô Tả Bài viết</label>
                                     <textarea name="desc" class="form-control summernote" rows="4">{{ $news->desc }}</textarea>
                                 </div>
                                 <div class="form-group">
@@ -112,7 +112,7 @@
 
                         </div>
                     </div>
-                </div> 
+                </div>
             </form>
         </div>
     </div>

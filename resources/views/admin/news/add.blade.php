@@ -18,7 +18,7 @@
                     <div class="d-flex px-3 py-1 my-2 ">
                         <button type="submit" class="btn btn-primary submit-check mr-2">Lưu</button>
                         <button type="reset" class="btn btn-secondary mr-2">Làm lại</button>
-                        <a href="{{ route('product.index') }}" class="btn btn-danger">Thoát</a>
+                        <a href="{{ route('news.index') }}" class="btn btn-danger">Thoát</a>
                     </div>
                 </div>
                 @csrf
