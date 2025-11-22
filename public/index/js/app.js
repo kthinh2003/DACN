@@ -807,7 +807,7 @@ $(document).ready(function () {
             }
         }
     });
-});
+
     $('#cart-province').on('change', function () {
         var provinceId = $(this).val();
         if (provinceId != 0) {
